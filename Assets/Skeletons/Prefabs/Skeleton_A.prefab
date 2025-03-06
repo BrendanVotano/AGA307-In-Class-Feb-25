@@ -811,6 +811,7 @@ GameObject:
   - component: {fileID: 405068}
   - component: {fileID: 9554932}
   - component: {fileID: 7072359466421137925}
+  - component: {fileID: -2498127973077183264}
   m_Layer: 0
   m_Name: Skeleton_A
   m_TagString: Enemy
@@ -880,6 +881,19 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!114 &-2498127973077183264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf0305dfc3619940a91b1b0bc87c6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDistance: 1000
 --- !u!1 &149742
 GameObject:
   m_ObjectHideFlags: 0

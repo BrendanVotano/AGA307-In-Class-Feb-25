@@ -1,10 +1,16 @@
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
+public enum EnemyType
+{
+    OneHanded, TwoHanded, Archer
+}
+public enum PatrolType { Linear, PingPong, Random}
 public class EnemyManager : MonoBehaviour
 {
     public int initialSpawnCount = 6;
+    public float initialSpawnDelay = 1f;
     public string killCondition = "J";
     private string[] enemyNames = new string[] {"John", "Paul", "Kris", "Josh","Ashley","Sean", "Petr"};
     public Transform[] spawnPoints;
@@ -14,9 +20,12 @@ public class EnemyManager : MonoBehaviour
     public int EnemyCount => enemies.Count;
     public bool NoEnemies => enemies.Count == 0;
 
+    public Transform GetRandomSpawnPoint => spawnPoints[Random.Range(0, spawnPoints.Length)];
+    public Transform GetSpecificSpawnPoint(int _spawnPoint) => spawnPoints[_spawnPoint];
+
     void Start()
     {
-        SpawnEnemies();
+        StartCoroutine(SpawnWithDelay(initialSpawnCount, initialSpawnDelay));
     }
 
     private void Update()
@@ -27,6 +36,19 @@ public class EnemyManager : MonoBehaviour
             KillSpecificEnemy(killCondition);
         if (Input.GetKeyDown(KeyCode.H))
             KillAllEnemies();
+    }
+
+    /// <summary>
+    /// Spawns enemies with a delay until the initial spawn count is met
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator SpawnWithDelay(int _spawnCount, float _spawnDelay)
+    {
+        for(int i = 0; i < _spawnCount; i++)
+        {
+            yield return new WaitForSeconds(_spawnDelay);
+            SpawnEnemy();
+        }
     }
 
     /// <summary>
@@ -50,6 +72,8 @@ public class EnemyManager : MonoBehaviour
         int rndName = Random.Range(0, enemyNames.Length);
         GameObject enemy = Instantiate(enemyTypes[rndEnemy], spawnPoints[rndSpawn].transform.position, spawnPoints[rndSpawn].transform.rotation);
         enemy.name = enemyNames[rndName];
+        if(enemy.GetComponent<Enemy>() != null)
+            enemy.GetComponent<Enemy>().Initialize(this, GetRandomSpawnPoint);
         enemies.Add(enemy);
     }
 
