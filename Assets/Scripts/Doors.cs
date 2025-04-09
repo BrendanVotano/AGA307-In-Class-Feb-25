@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Doors : MonoBehaviour
 {
+    public Animator anim;
     public GameObject leftDoor;
     public GameObject rightDoor;
 
@@ -9,8 +10,7 @@ public class Doors : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            leftDoor.SetActive(false);
-            rightDoor.SetActive(false);
+            anim.SetTrigger("DoorOpen");
         }
     }
 
@@ -18,8 +18,7 @@ public class Doors : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            leftDoor.SetActive(true);
-            rightDoor.SetActive(true);
+            anim.SetTrigger("DoorClose");
         }
     }
 }

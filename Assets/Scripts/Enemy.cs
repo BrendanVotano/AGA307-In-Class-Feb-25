@@ -3,13 +3,20 @@ using System.Collections;
 
 public class Enemy : GameBehaviour
 {
+    [Header("Basics")]
     public EnemyType myType;
+    [Space(10)]
     public PatrolType myPatrolType;
+    [Header("Stats")]
     public float moveDistance = 1000f;
     public float stoppingDistance = 0.3f;
-    
+
+    [Header("Health Bar")]
+    public HealthBar healthBar;
+ 
     private float mySpeed;
     public int myHealth;
+    private int myMaxHealth;
     private int myDamage;
     private int myScore;
     public int MyScore => myScore;
@@ -19,8 +26,13 @@ public class Enemy : GameBehaviour
     private bool reverse;           //Needed for PingPong movement
     private int patrolPoint;        //Needed for Linear movement;
 
-    public void Initialize(Transform _startPos)
+    public Animator anim;
+
+
+    public void Initialize(Transform _startPos, string _name)
     {
+        //anim = GetComponent<Animator>();
+
         switch(myType)
         {
             case EnemyType.OneHanded:
@@ -51,12 +63,16 @@ public class Enemy : GameBehaviour
                 myScore = 100;
                 break;
         }
+        myMaxHealth = myHealth;
 
         startPos = _startPos;
         endPos = _EM.GetRandomSpawnPoint;
         moveToPos = endPos;
 
-        StartCoroutine(Move());
+        healthBar.SetName(_name);
+        healthBar.UpdateHealthBar(myHealth, myMaxHealth);
+
+        //StartCoroutine(Move());
     }
 
     private IEnumerator Move()
@@ -95,17 +111,28 @@ public class Enemy : GameBehaviour
     {
         myHealth -= _damage;
         _GM.AddScore(myScore);
+        healthBar.UpdateHealthBar(myHealth, myMaxHealth);
 
         if (myHealth <= 0)
             myHealth = 0;
 
         if (myHealth == 0)
             Die();
+        else
+            PlayAnimation("Hit", 3);
     }
 
     public void Die()
     {
+        GetComponent<Collider>().enabled = false;
+        PlayAnimation("Die", 3);
         StopAllCoroutines();
+    }
+
+    private void PlayAnimation(string _animationName, int _animationCount)
+    {
+        int rnd = Random.Range(1, _animationCount+1);
+        anim.SetTrigger(_animationName + rnd);
     }
 
 

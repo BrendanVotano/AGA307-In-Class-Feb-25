@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23177219321394684}
   - component: {fileID: 4507127176016140543}
   m_Layer: 0
-  m_Name: Cube_028
+  m_Name: DoorRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 33437140218525744}
   - component: {fileID: 23041333616877120}
   - component: {fileID: -2269224569865915450}
+  - component: {fileID: 5782692641800040320}
   m_Layer: 0
   m_Name: arch
   m_TagString: Environment
@@ -331,6 +332,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300192, guid: 4e15996ba1e2f4b4392985ef6ac6b27c, type: 3}
+--- !u!95 &5782692641800040320
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784150957079328}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 58725920564a0434f81fe03abc2e118e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1925896781809694
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +367,7 @@ GameObject:
   - component: {fileID: 23599474079787920}
   - component: {fileID: 8415762204694556022}
   m_Layer: 0
-  m_Name: Cube_025
+  m_Name: DoorLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -491,7 +514,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6721571133564769163}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -562,6 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae14730e0c07dc4449da477f16b59587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 5782692641800040320}
   leftDoor: {fileID: 1925896781809694}
   rightDoor: {fileID: 1161486344028972}
 --- !u!114 &6165735951898533116

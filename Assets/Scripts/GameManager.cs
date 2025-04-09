@@ -13,6 +13,6 @@ public class GameManager : Singleton<GameManager>
     public void AddScore(int _score)
     {
         score += _score;
-        print("Score: " + score);
+        _UI.UpdateScore(score);
     }
 }
