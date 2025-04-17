@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 9523490}
   - component: {fileID: -6386255587058991188}
   - component: {fileID: -3408230568589545719}
+  - component: {fileID: -5511972223939537623}
   m_Layer: 0
   m_Name: Skeleton_E
   m_TagString: Untagged
@@ -754,7 +755,7 @@ Animator:
   m_GameObject: {fileID: 123184}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 20300ac630e0fcd4dbab63a9b39cdafa, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 482d0cb0635bdde4da08c9180da1ff30, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -779,12 +780,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 0
-  myPatrolType: 0
+  myState: 0
+  myPatrol: 0
   moveDistance: 1000
   stoppingDistance: 0.3
   healthBar: {fileID: 6668716744804296479}
+  detectDistance: 10
+  detectTime: 3
   myHealth: 500
   anim: {fileID: 9523490}
+  agent: {fileID: -5511972223939537623}
 --- !u!136 &-3408230568589545719
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -808,6 +813,28 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
+--- !u!195 &-5511972223939537623
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123184}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &123194
 GameObject:
   m_ObjectHideFlags: 0

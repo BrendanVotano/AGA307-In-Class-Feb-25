@@ -812,6 +812,7 @@ GameObject:
   - component: {fileID: 9554932}
   - component: {fileID: 7072359466421137925}
   - component: {fileID: -2498127973077183264}
+  - component: {fileID: 5796750382418852694}
   m_Layer: 0
   m_Name: Skeleton_A
   m_TagString: Enemy
@@ -895,12 +896,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 0
-  myPatrolType: 0
+  myState: 0
+  myPatrol: 0
   moveDistance: 1000
   stoppingDistance: 0.3
   healthBar: {fileID: 6688956951216990125}
+  detectDistance: 10
+  detectTime: 3
   myHealth: 500
   anim: {fileID: 9554932}
+  agent: {fileID: 5796750382418852694}
+--- !u!195 &5796750382418852694
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146754}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &149742
 GameObject:
   m_ObjectHideFlags: 0

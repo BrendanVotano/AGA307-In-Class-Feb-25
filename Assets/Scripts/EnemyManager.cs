@@ -6,6 +6,7 @@ public enum EnemyType
 {
     OneHanded, TwoHanded, Archer
 }
+public enum EnemyState { Patrol, Detect, Chase, Attack, Die}
 public enum PatrolType { Linear, PingPong, Random}
 public class EnemyManager : Singleton<EnemyManager>
 {
