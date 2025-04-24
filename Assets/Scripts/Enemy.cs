@@ -37,6 +37,9 @@ public class Enemy : GameBehaviour
     public Animator anim;
     public NavMeshAgent agent;
 
+    private EnemyWeapon enemyWeapon;
+    private AudioSource audioSource;
+
     private void ChangeSpeed(float _speed) => agent.speed = _speed;
 
     public void Initialize(Transform _startPos, string _name)
@@ -82,7 +85,20 @@ public class Enemy : GameBehaviour
         healthBar.SetName(_name);
         healthBar.UpdateHealthBar(myHealth, myMaxHealth);
 
-        SetupAI();
+        if (GetComponentInChildren<EnemyWeapon>() != null)
+        {
+            enemyWeapon = GetComponentInChildren<EnemyWeapon>();
+            enemyWeapon.SetDamage(myDamage);
+        }
+        else
+            Debug.LogWarning("No Enemy Weapon Found.");
+
+        if (GetComponent<AudioSource>() == null)
+            gameObject.AddComponent<AudioSource>();
+
+        audioSource = GetComponent<AudioSource>();
+
+            SetupAI();
     }
 
     private void SetupAI()
@@ -171,7 +187,6 @@ public class Enemy : GameBehaviour
         myState = EnemyState.Chase;
     }
 
-
     private IEnumerator Move()
     {
         switch(myPatrol)
@@ -216,7 +231,10 @@ public class Enemy : GameBehaviour
         if (myHealth == 0)
             Die();
         else
+        {
             PlayAnimation("Hit", 3);
+            _SOUND.PlayEnemyHit(audioSource);
+        }
     }
 
     public void Die()
@@ -226,6 +244,7 @@ public class Enemy : GameBehaviour
         agent.SetDestination(transform.position);
         GetComponent<Collider>().enabled = false;
         PlayAnimation("Die", 3);
+        _SOUND.PlayEnemyDie(audioSource);
         StopAllCoroutines();
     }
 
@@ -235,18 +254,16 @@ public class Enemy : GameBehaviour
         anim.SetTrigger(_animationName + rnd);
     }
 
-
-    /*
-    private IEnumerator Move()
+    public void EnableCollider()
     {
-        for(int i = 0; i < moveDistance; i++)
-        {
-            transform.Translate(Vector3.forward * Time.deltaTime);
-            yield return null;
-        }
-        transform.Rotate(Vector3.up * 180);
-        yield return new WaitForSeconds(Random.Range(1f, 3f));
-        StartCoroutine(Move());
+        enemyWeapon.SetCollider(true);
+        _SOUND.PlayEnemyAttack(audioSource);
     }
-    */
+
+    public void DisableCollider()
+    {
+        enemyWeapon.SetCollider(false);
+    }
+
+    public void Footstep() => _SOUND.PlayEnemyFootstep(audioSource);
 }
